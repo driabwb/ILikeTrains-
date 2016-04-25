@@ -9,6 +9,7 @@ public class Level1Screen implements Screen {
 
     Level1Screen(){
         theWorld = Level1World.getTheWorld();
+        Gdx.input.setInputProcessor(theWorld);
     }
 
     @Override

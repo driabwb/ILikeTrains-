@@ -12,8 +12,12 @@ public class Train extends GameObject{
     private Rectangle rect = null;
     private static ShapeRenderer shapeRenderer = null;
     private Track track = null;
+    private int initX,initY;
+
     public Train(int x, int y, Track myTrack){
         super(x,y);
+        initX = x;
+        initY = y;
         rect = new Rectangle(x, y,50,50);
         shapeRenderer = new ShapeRenderer();
         track = myTrack;
@@ -29,6 +33,13 @@ public class Train extends GameObject{
 
     public boolean isFinishedRun(){
         return true;
+    }
+
+    public void reset(){
+        super.setX(initX);
+        super.setY(initY);
+        rect.setPosition(initX, initY);
+        track.reset();
     }
 
     @Override

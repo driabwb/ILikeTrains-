@@ -16,6 +16,7 @@ public class Level1World extends InputAdapter {
     private GameObject draggedObject = null;
 
     private PlayButton playButton = null;
+    private Train train1 = null;
 
     private Level1World(){
         batch = new SpriteBatch();
@@ -34,7 +35,7 @@ public class Level1World extends InputAdapter {
         trackList.get(3).setNext(trackList.get(0));
         Track track = new Track(0,0, trackList);
 
-        Train train1 = new Train(width/2, height/4, track);
+        train1 = new Train(width/2, height/4, track);
 
         Mutex m = new Mutex(width/4, height/4);
         playButton = new PlayButton(width - 200, 100);
@@ -43,6 +44,7 @@ public class Level1World extends InputAdapter {
         gameObjects.add(track);
         gameObjects.add(train1);
         gameObjects.add(m);
+        gameObjects.add(playButton);
     }
 
     public static synchronized Level1World getTheWorld(){
@@ -59,23 +61,50 @@ public class Level1World extends InputAdapter {
     }
 
     public void update(double delta){
-        for(GameObject go : gameObjects){
-            go.update(delta);
+        if(playButton.isPlay()) {
+            for (GameObject go : gameObjects) {
+                go.update(delta);
+            }
         }
     }
 
     @Override
     public boolean touchDown(int x, int y, int ptr, int button){
+        y = Gdx.graphics.getHeight() - y;
+        Gdx.app.log(this.getClass().getName(), "Point: (" + x + ", " + y + ")");
+        for (GameObject go : gameObjects) {
+            draggedObject = go.touchDown(x, y, button);
+            if(null != draggedObject){
+                if(playButton.getReset() == draggedObject){
+                    if(playButton.getReset().isReset()) {
+                        train1.reset();
+                    }
+                    draggedObject = null;
+                }
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean touchDragged(int x, int y, int ptr){
-        return false;
+        if(null != draggedObject){
+            draggedObject.setX(x);
+            draggedObject.setY(y);
+        }
+
+        return null != draggedObject;
     }
 
     @Override
     public boolean touchUp(int x, int y, int ptr, int button){
-        return false;
+        if(null == draggedObject){
+            return false;
+        }
+        // Do the mutex placement
+
+        draggedObject = null;
+        return true;
     }
 }

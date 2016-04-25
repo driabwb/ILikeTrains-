@@ -35,8 +35,12 @@ public abstract class GameObject {
         return false;
     }
 
-    public GameObject touchDown() { return null; }
+    public GameObject touchDown(int x, int y, int button) { return null; }
 
     public abstract void draw(Batch b);
     public abstract void update(double delta);
+
+    protected double distance2(int x, int y){
+        return Math.pow((x-this.x), 2) + Math.pow((y-this.y), 2);
+    }
 }

@@ -58,6 +58,9 @@ public class Level1World extends InputAdapter {
         for(GameObject go : gameObjects){
             go.draw(batch);
         }
+        if(null != draggedObject){
+            draggedObject.draw(batch);
+        }
     }
 
     public void update(double delta){
@@ -91,7 +94,7 @@ public class Level1World extends InputAdapter {
     public boolean touchDragged(int x, int y, int ptr){
         if(null != draggedObject){
             draggedObject.setX(x);
-            draggedObject.setY(y);
+            draggedObject.setY(Gdx.graphics.getHeight() - y);
         }
 
         return null != draggedObject;

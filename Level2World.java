@@ -22,7 +22,9 @@ public class Level2World extends InputAdapter {
     private PlayButton playButton = null;
     private ForwardButton forwardButton = null;
     private Track track1 = null;
+    private Track track2 = null;
     private Train train1 = null;
+    private Train train2 = null;
     private Lock theLock = null;
     private Mutex lock = null;
     private Mutex unlock = null;
@@ -35,17 +37,28 @@ public class Level2World extends InputAdapter {
         camera.setToOrtho(false, width, height);
 
         List<TrackPiece> trackList = new ArrayList<TrackPiece>();
-        trackList.add(new StraightTrackPiece(null, new Vector2(width/2, height/4), new Vector2(3*width/4, height/4)));
-        trackList.add(new StraightTrackPiece(null, new Vector2(3*width/4, height/4), new Vector2(3*width/4, 3*height/4)));
-        trackList.add(new StraightTrackPiece(null, new Vector2(3*width/4, 3*height/4), new Vector2(width/2, 3*height/4)));
+        trackList.add(new StraightTrackPiece(null, new Vector2(width/2, height/4), new Vector2(5*width/8, height/4)));
+        trackList.add(new StraightTrackPiece(null, new Vector2(5*width/8, height/4), new Vector2(5*width/8, 3*height/4)));
+        trackList.add(new StraightTrackPiece(null, new Vector2(5*width/8, 3*height/4), new Vector2(width/2, 3*height/4)));
         trackList.add(new StraightTrackPiece(null, new Vector2(width/2, 3*height/4), new Vector2(width/2, height/4)));
         trackList.get(0).setNext(trackList.get(1));
         trackList.get(1).setNext(trackList.get(2));
         trackList.get(2).setNext(trackList.get(3));
         trackList.get(3).setNext(trackList.get(0));
+        List<TrackPiece> trackList2 = new ArrayList<TrackPiece>();
+        trackList2.add(new StraightTrackPiece(null, new Vector2(3*width/4,3*height/4), new Vector2(5*width/8, 3*height/4)));
+        trackList2.add(new StraightTrackPiece(null, new Vector2(5*width/8, 3*height/4), new Vector2(5*width/8, height/4)));
+        trackList2.add(new StraightTrackPiece(null, new Vector2(5*width/8, height/4), new Vector2(3*width/4, height/4)));
+        trackList2.add(new StraightTrackPiece(null, new Vector2(3*width/4, height/4), new Vector2(3*width/4, 3*height/4)));
+        trackList2.get(0).setNext(trackList2.get(1));
+        trackList2.get(1).setNext(trackList2.get(2));
+        trackList2.get(2).setNext(trackList2.get(3));
+        trackList2.get(3).setNext(trackList2.get(0));
         track1 = new Track(0,0, trackList);
+        track2 = new Track(0,0, trackList2);
 
         train1 = new Train(width/2, height/4, track1);
+        train2 = new Train(3*width/4, 3*height/4, track2);
         theLock = new Lock();
         lock = new Mutex(width/8, 3*height/4, true, theLock, Color.RED);
         unlock = new Mutex(width/8+300, 3*height/4, false, theLock, Color.GREEN);
@@ -55,6 +68,8 @@ public class Level2World extends InputAdapter {
         gameObjects = new ArrayList<GameObject>();
         gameObjects.add(track1);
         gameObjects.add(train1);
+        gameObjects.add(track2);
+        gameObjects.add(train2);
         gameObjects.add(lock);
         gameObjects.add(unlock);
         gameObjects.add(playButton);
@@ -101,6 +116,7 @@ public class Level2World extends InputAdapter {
                 if(playButton.getReset() == draggedObject){
                     if(playButton.getReset().isReset()) {
                         train1.reset();
+                        train2.reset();
                         theLock.unlock();
                     }
                     draggedObject = null;
@@ -130,6 +146,7 @@ public class Level2World extends InputAdapter {
         }
         // Do the mutex placement
         track1.addMutex((Mutex)draggedObject);
+        track2.addMutex((Mutex)draggedObject);
         draggedObject = null;
         return true;
     }

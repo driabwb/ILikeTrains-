@@ -22,6 +22,46 @@ public class StraightTrackPiece extends TrackPiece {
     }
 
     @Override
+    public boolean addMutex(int x, int y, int radius){
+        float xline = end.x-begin.x;
+        float yline = end.y-begin.y;
+        int newposx, newposy;
+
+        Gdx.app.log(this.getClass().getName(), "Begin Point: (" + begin.x + ", " + begin.y + ")");
+        Gdx.app.log(this.getClass().getName(), "End Point: (" + end.x + ", " + end.y + ")");
+
+        Vector2 u = end.cpy().sub(begin).nor();
+        Vector2 v = begin.cpy().sub(x, y);
+        // This checks if within radius of the line
+        if(radius < u.crs(v)){
+            return false;
+        }
+
+        Vector2 newpos =  begin.cpy().add(u.scl(v.len()));
+        Gdx.app.log("HERE", newpos.toString());
+
+        float minX = Math.min(begin.x, end.x)-radius;
+        float maxX = Math.max(begin.x, end.x)+radius;
+        float minY = Math.min(begin.y, end.y)-radius;
+        float maxY = Math.max(begin.y, end.y)+radius;
+        if(!(minX < x && x < maxX)){
+            Gdx.app.log("HERE", "x pos fail");
+            return false;
+        }
+        if(!(minY < y && y < maxY)){
+            Gdx.app.log("HERE", "y pos fail");
+            return false;
+        }
+
+        StraightTrackPiece newPiece = new StraightTrackPiece(next, newpos, end.cpy());
+        MutexTrackPiece mutex = new MutexTrackPiece(Math.round(newpos.x), Math.round(newpos.y), newPiece);
+        this.end.set(newpos.cpy());
+        next = mutex;
+
+        return true;
+    }
+
+    @Override
     public void draw(Batch sb) {
         Gdx.app.log(this.getClass().getName(), "Begin: " + begin.toString());
         Gdx.app.log(this.getClass().getName(), "End: " + end.toString());

@@ -25,11 +25,24 @@ public class Track extends GameObject{
         currentPiece = startPiece;
     }
 
+    public boolean addMutex(int x, int y, int radius){
+        for(TrackPiece piece : trackPieces){
+            if(piece.addMutex(x, y, radius)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void draw(Batch sb){
-        for(TrackPiece tp : trackPieces){
-            tp.draw(sb);
-        }
+        TrackPiece curr = startPiece;
+        startPiece.draw(sb);
+        do{
+
+            curr.draw(sb);
+            curr = curr.getNext();
+        }while(startPiece != curr);
     }
 
     @Override

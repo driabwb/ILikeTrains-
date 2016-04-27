@@ -44,4 +44,8 @@ public class Mutex extends GameObject {
 
     @Override
     public void update(double delta){}
+
+    public int getRadius(){
+        return radius;
+    }
 }

@@ -21,6 +21,7 @@ public abstract class TrackPiece {
         this.next = next;
     }
 
+    public abstract boolean addMutex(int x, int y, int radius);
     public abstract void draw(Batch sb);
     public abstract Vector2 getNextPosition(Vector2 currentVector2);
     public TrackPiece getCurrentTrackPiece(){

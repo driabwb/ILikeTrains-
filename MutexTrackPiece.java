@@ -10,16 +10,20 @@ public class MutexTrackPiece extends TrackPiece {
     private int radius = 50;
     private ShapeRenderer renderer = null;
 
-    public MutexTrackPiece(int x, int y, TrackPiece nextPiece){
+    public MutexTrackPiece(int x, int y, boolean isLock, TrackPiece nextPiece){
         super(nextPiece);
         this.x = x;
         this.y = y;
         renderer = new ShapeRenderer();
-        renderer.setColor(Color.GREEN);
+        if(isLock) {
+            renderer.setColor(Color.RED);
+        }else {
+            renderer.setColor(Color.GREEN);
+        }
     }
 
     @Override
-    public boolean addMutex(int x, int y, int radius){
+    public boolean addMutex(Mutex m){
         return false;
     }
 

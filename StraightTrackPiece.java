@@ -22,7 +22,10 @@ public class StraightTrackPiece extends TrackPiece {
     }
 
     @Override
-    public boolean addMutex(int x, int y, int radius){
+    public boolean addMutex(Mutex m){
+        int x = m.getX();
+        int y = m.getY();
+        int radius = m.getRadius();
         float xline = end.x-begin.x;
         float yline = end.y-begin.y;
         int newposx, newposy;
@@ -54,7 +57,7 @@ public class StraightTrackPiece extends TrackPiece {
         }
 
         StraightTrackPiece newPiece = new StraightTrackPiece(next, newpos, end.cpy());
-        MutexTrackPiece mutex = new MutexTrackPiece(Math.round(newpos.x), Math.round(newpos.y), newPiece);
+        MutexTrackPiece mutex = new MutexTrackPiece(Math.round(newpos.x), Math.round(newpos.y), m.isLocked(), newPiece);
         this.end.set(newpos.cpy());
         next = mutex;
 

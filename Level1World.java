@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,6 +24,8 @@ public class Level1World extends InputAdapter {
     private ForwardButton forwardButton = null;
     private Track track1 = null;
     private Train train1 = null;
+    private Mutex lock = null;
+    private Mutex unlock = null;
 
     private Level1World(Game game){
         batch = new SpriteBatch();
@@ -43,14 +46,16 @@ public class Level1World extends InputAdapter {
 
         train1 = new Train(width/2, height/4, track1);
 
-        Mutex m = new Mutex(width/4, height/4);
+        lock = new Mutex(width/4, 3*height/4, true, Color.RED);
+        unlock = new Mutex(width/4+300, 3*height/4, false, Color.GREEN);
         playButton = new PlayButton(width - 200, 100);
         forwardButton = new ForwardButton(width-200, height-300,game);
 
         gameObjects = new ArrayList<GameObject>();
         gameObjects.add(track1);
         gameObjects.add(train1);
-        gameObjects.add(m);
+        gameObjects.add(lock);
+        gameObjects.add(unlock);
         gameObjects.add(playButton);
         gameObjects.add(forwardButton);
     }
@@ -124,7 +129,7 @@ public class Level1World extends InputAdapter {
             return false;
         }
         // Do the mutex placement
-        track1.addMutex(draggedObject.getX(), draggedObject.getY(), ((Mutex)draggedObject).getRadius());
+        track1.addMutex((Mutex)draggedObject);
         draggedObject = null;
         return true;
     }

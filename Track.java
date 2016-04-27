@@ -25,9 +25,9 @@ public class Track extends GameObject{
         currentPiece = startPiece;
     }
 
-    public boolean addMutex(int x, int y, int radius){
+    public boolean addMutex(Mutex m){
         for(TrackPiece piece : trackPieces){
-            if(piece.addMutex(x, y, radius)){
+            if(piece.addMutex(m)){
                 return true;
             }
         }

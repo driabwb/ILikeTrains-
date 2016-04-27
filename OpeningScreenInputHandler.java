@@ -27,7 +27,7 @@ public class OpeningScreenInputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        theGame.setScreen(new Level1Screen());
+        theGame.setScreen(new Level1Screen(theGame));
         return true;
     }
 

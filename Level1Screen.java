@@ -1,5 +1,6 @@
 package com.david.iter1iliketrains;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -7,8 +8,8 @@ import com.badlogic.gdx.graphics.GL20;
 public class Level1Screen implements Screen {
     private Level1World theWorld = null;
 
-    Level1Screen(){
-        theWorld = Level1World.getTheWorld();
+    Level1Screen(Game game){
+        theWorld = Level1World.getTheWorld(game);
         Gdx.input.setInputProcessor(theWorld);
     }
 

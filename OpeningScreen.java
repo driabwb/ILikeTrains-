@@ -8,7 +8,8 @@ public class OpeningScreen implements Screen {
     OpeningScreenWorld theWorld = null;
     OpeningScreenRenderer renderer = null;
 
-    public OpeningScreen(){
+    public OpeningScreen(Game game){
+        Gdx.input.setInputProcessor(new OpeningScreenInputHandler(game));
         theWorld = new OpeningScreenWorld();
         renderer = new OpeningScreenRenderer(theWorld);
 

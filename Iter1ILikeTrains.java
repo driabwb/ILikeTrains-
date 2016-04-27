@@ -8,7 +8,6 @@ public class Iter1ILikeTrains extends Game {
 		return;
 	}
 	public void create(){
-		setScreen(new OpeningScreen());
-		Gdx.input.setInputProcessor(new OpeningScreenInputHandler(this));
+		setScreen(new OpeningScreen(this));
 	}
 }

@@ -1,5 +1,6 @@
 package com.david.iter1iliketrains;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Camera;
@@ -19,10 +20,11 @@ public class Level1World extends InputAdapter {
     private GameObject draggedObject = null;
 
     private PlayButton playButton = null;
+    private ForwardButton forwardButton = null;
     private Track track1 = null;
     private Train train1 = null;
 
-    private Level1World(){
+    private Level1World(Game game){
         batch = new SpriteBatch();
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
@@ -43,17 +45,19 @@ public class Level1World extends InputAdapter {
 
         Mutex m = new Mutex(width/4, height/4);
         playButton = new PlayButton(width - 200, 100);
+        forwardButton = new ForwardButton(width-200, height-300,game);
 
         gameObjects = new ArrayList<GameObject>();
         gameObjects.add(track1);
         gameObjects.add(train1);
         gameObjects.add(m);
         gameObjects.add(playButton);
+        gameObjects.add(forwardButton);
     }
 
-    public static synchronized Level1World getTheWorld(){
+    public static synchronized Level1World getTheWorld(Game game){
         if(null == theWorld){
-            theWorld = new Level1World();
+            theWorld = new Level1World(game);
         }
         return theWorld;
     }
@@ -68,6 +72,10 @@ public class Level1World extends InputAdapter {
         if(null != draggedObject){
             draggedObject.draw(batch);
         }
+
+        AssetLoader.font.draw(batch, "Locks", 200, Gdx.graphics.getHeight() - 100);
+        AssetLoader.font.draw(batch, "Play", playButton.getX(), playButton.getY()+200);
+        AssetLoader.font.draw(batch, "Forward", forwardButton.getX(), forwardButton.getY());
         batch.end();
     }
 

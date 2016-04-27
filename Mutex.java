@@ -15,16 +15,18 @@ public class Mutex extends GameObject {
 
     private int radius = 100;
     private boolean isLocked = false;
+    private Lock theLock;
 
-    Mutex(int x, int y, boolean locked) {
-        this(x,y, locked, Color.CYAN);
+    Mutex(int x, int y, boolean locked, Lock lock) {
+        this(x,y, locked, lock, Color.CYAN);
     }
 
-    Mutex(int x, int y, boolean locked, Color c){
+    Mutex(int x, int y, boolean locked, Lock lock, Color c){
         super(x,y);
         renderer = new ShapeRenderer();
         renderer.setColor(c);
         isLocked = locked;
+        theLock = lock;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class Mutex extends GameObject {
             return null;
         }
 
-        return new Mutex(x, y, isLocked, renderer.getColor());
+        return new Mutex(x, y, isLocked, theLock, renderer.getColor());
     }
 
     @Override
@@ -53,5 +55,9 @@ public class Mutex extends GameObject {
 
     public boolean isLocked(){
         return isLocked;
+    }
+
+    public Lock getLock(){
+        return theLock;
     }
 }

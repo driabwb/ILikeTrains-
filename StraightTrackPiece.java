@@ -41,23 +41,20 @@ public class StraightTrackPiece extends TrackPiece {
         }
 
         Vector2 newpos =  begin.cpy().add(u.scl(v.len()));
-        Gdx.app.log("HERE", newpos.toString());
 
         float minX = Math.min(begin.x, end.x)-radius;
         float maxX = Math.max(begin.x, end.x)+radius;
         float minY = Math.min(begin.y, end.y)-radius;
         float maxY = Math.max(begin.y, end.y)+radius;
         if(!(minX < x && x < maxX)){
-            Gdx.app.log("HERE", "x pos fail");
             return false;
         }
         if(!(minY < y && y < maxY)){
-            Gdx.app.log("HERE", "y pos fail");
             return false;
         }
 
         StraightTrackPiece newPiece = new StraightTrackPiece(next, newpos, end.cpy());
-        MutexTrackPiece mutex = new MutexTrackPiece(Math.round(newpos.x), Math.round(newpos.y), m.isLocked(), newPiece);
+        MutexTrackPiece mutex = new MutexTrackPiece(Math.round(newpos.x), Math.round(newpos.y), m.isLocked(), m.getLock(), newPiece);
         this.end.set(newpos.cpy());
         next = mutex;
 

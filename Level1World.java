@@ -24,6 +24,7 @@ public class Level1World extends InputAdapter {
     private ForwardButton forwardButton = null;
     private Track track1 = null;
     private Train train1 = null;
+    private Lock theLock = null;
     private Mutex lock = null;
     private Mutex unlock = null;
 
@@ -45,9 +46,9 @@ public class Level1World extends InputAdapter {
         track1 = new Track(0,0, trackList);
 
         train1 = new Train(width/2, height/4, track1);
-
-        lock = new Mutex(width/4, 3*height/4, true, Color.RED);
-        unlock = new Mutex(width/4+300, 3*height/4, false, Color.GREEN);
+        theLock = new Lock();
+        lock = new Mutex(width/4, 3*height/4, true, theLock, Color.RED);
+        unlock = new Mutex(width/4+300, 3*height/4, false, theLock, Color.GREEN);
         playButton = new PlayButton(width - 200, 100);
         forwardButton = new ForwardButton(width-200, height-300,game);
 
@@ -102,6 +103,7 @@ public class Level1World extends InputAdapter {
                 if(playButton.getReset() == draggedObject){
                     if(playButton.getReset().isReset()) {
                         train1.reset();
+                        theLock.unlock();
                     }
                     draggedObject = null;
                 }

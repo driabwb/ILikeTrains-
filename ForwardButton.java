@@ -34,7 +34,7 @@ public class ForwardButton extends GameObject{
         if(Math.pow(radius, 2) >= distance2(x,y)){
             theGame.setScreen(new Level2Screen(theGame));
         }
-        return this;
+        return null;
     }
 }
 

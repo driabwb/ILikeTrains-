@@ -26,11 +26,13 @@ public class Track extends GameObject{
     }
 
     public boolean addMutex(Mutex m){
-        for(TrackPiece piece : trackPieces){
-            if(piece.addMutex(m)){
+        TrackPiece curr = startPiece;
+        do{
+            if(curr.addMutex(m)){
                 return true;
             }
-        }
+            curr = curr.getNext();
+        }while(curr != startPiece);
         return false;
     }
 

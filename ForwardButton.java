@@ -32,7 +32,7 @@ public class ForwardButton extends GameObject{
     public GameObject touchDown(int x, int y, int button){
         Gdx.app.log(this.getClass().getName(), "Point: (" + this.x + ", " + this.y + ")");
         if(Math.pow(radius, 2) >= distance2(x,y)){
-            theGame.setScreen(new OpeningScreen(theGame));
+            theGame.setScreen(new Level2Screen(theGame));
         }
         return this;
     }

@@ -12,8 +12,8 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level1World extends InputAdapter {
-    private static Level1World theWorld = null;
+public class Level2World extends InputAdapter {
+    private static Level2World theWorld = null;
     private List<GameObject> gameObjects = null;
     private Batch batch = null;
     private OrthographicCamera camera = null;
@@ -27,7 +27,7 @@ public class Level1World extends InputAdapter {
     private Mutex lock = null;
     private Mutex unlock = null;
 
-    private Level1World(Game game){
+    private Level2World(Game game){
         batch = new SpriteBatch();
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
@@ -61,9 +61,9 @@ public class Level1World extends InputAdapter {
         gameObjects.add(forwardButton);
     }
 
-    public static synchronized Level1World getTheWorld(Game game){
+    public static synchronized Level2World getTheWorld(Game game){
         if(null == theWorld){
-            theWorld = new Level1World(game);
+            theWorld = new Level2World(game);
         }
         return theWorld;
     }

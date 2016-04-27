@@ -17,7 +17,7 @@ public class Level1World extends InputAdapter {
     private static Level1World theWorld = null;
     private List<GameObject> gameObjects = null;
     private Batch batch = null;
-    private Camera camera = null;
+    private OrthographicCamera camera = null;
     private GameObject draggedObject = null;
 
     private PlayButton playButton = null;
@@ -33,6 +33,7 @@ public class Level1World extends InputAdapter {
         int width = Gdx.graphics.getWidth();
         int height = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(width, height);
+        camera.setToOrtho(false, width, height);
 
         List<TrackPiece> trackList = new ArrayList<TrackPiece>();
         trackList.add(new StraightTrackPiece(null, new Vector2(width/2, height/4), new Vector2(3*width/4, height/4)));
@@ -47,8 +48,8 @@ public class Level1World extends InputAdapter {
 
         train1 = new Train(width/2, height/4, track1);
         theLock = new Lock();
-        lock = new Mutex(width/4, 3*height/4, true, theLock, Color.RED);
-        unlock = new Mutex(width/4+300, 3*height/4, false, theLock, Color.GREEN);
+        lock = new Mutex(width/8, 3*height/4, true, theLock, Color.RED);
+        unlock = new Mutex(width/8+300, 3*height/4, false, theLock, Color.GREEN);
         playButton = new PlayButton(width - 200, 100);
         forwardButton = new ForwardButton(width-200, height-300,game);
 
@@ -70,18 +71,16 @@ public class Level1World extends InputAdapter {
 
     public void draw(){
         batch.setProjectionMatrix(camera.combined);
-
-        batch.begin();
         for(GameObject go : gameObjects){
             go.draw(batch);
         }
         if(null != draggedObject){
             draggedObject.draw(batch);
         }
-
-        AssetLoader.font.draw(batch, "Locks", 200, Gdx.graphics.getHeight() - 100);
-        AssetLoader.font.draw(batch, "Play", playButton.getX(), playButton.getY()+200);
-        AssetLoader.font.draw(batch, "Forward", forwardButton.getX(), forwardButton.getY());
+        batch.begin();
+        AssetLoader.font.draw(batch, "Locks", lock.getX()+100, lock.getY()+200);
+        AssetLoader.font.draw(batch, "Play", playButton.getX()-50, playButton.getY()+200);
+        AssetLoader.font.draw(batch, "Forward", forwardButton.getX()-100, forwardButton.getY()+200);
         batch.end();
     }
 

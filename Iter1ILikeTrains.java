@@ -10,4 +10,6 @@ public class Iter1ILikeTrains extends Game {
 	public void create(){
 		setScreen(new OpeningScreen(this));
 	}
+
+	public void resume() { setScreen(new OpeningScreen(this)); }
 }

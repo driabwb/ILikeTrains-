@@ -1,5 +1,10 @@
 # *I Like Trains!*
 
+**NOTE**
+*I Like Trains* is still a work in progress and the description reflects the intent for the finished product.  For a 
+better understanding of the current status of the project read the [How Is It Made?](#how-is-it-made) and 
+[The Design](#the-design) sections.
+
 ## Table of Contents
 1. [What is it?](#what-is-it)
 2. [A User's Perspective](#a-users-perspective)
@@ -10,7 +15,7 @@
 
 ## What is it?
 
-*I Like Trains!*, hereafter refered to as ILT, is a puzzle based game for mobile devices. 
+*I Like Trains!* is a puzzle based game for mobile devices. 
 The game places the user as an new employee whose job is to make trains traveling on tracks safe.  
 The user is provided in each level a track and some number of trains; they then must use locks, signals, and other
 tools provided to create a scenario that will allow all trains to move around their track without collisions.
@@ -31,7 +36,11 @@ a user in the perils as solutions to common parallel computing problems.
 
 ## A User's Perspective
 
+A run through of a sample set of screens for *I Like Trains!* is provided below.
 
+1. The session begins with the user opening the application and viewing a welcome screen.
+  [The welcome screen displays the title *I Like Trains!* with a play button below.](images/welcomeScreen.png)
+2. 
 
 ## How is it made?
 

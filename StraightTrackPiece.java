@@ -6,9 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
+// Class for straight pieces of track (Should work at any angle)
 public class StraightTrackPiece extends TrackPiece {
+    // Where does the track start
     private Vector2 begin;
+    // Where the track ends
     private Vector2 end;
+    // Vector from begin to end (for drawing)
     private Vector2 delta;
     private static ShapeRenderer renderer = null;
 
@@ -26,9 +30,6 @@ public class StraightTrackPiece extends TrackPiece {
         int x = m.getX();
         int y = m.getY();
         int radius = m.getRadius();
-        float xline = end.x-begin.x;
-        float yline = end.y-begin.y;
-        int newposx, newposy;
 
         Gdx.app.log(this.getClass().getName(), "Begin Point: (" + begin.x + ", " + begin.y + ")");
         Gdx.app.log(this.getClass().getName(), "End Point: (" + end.x + ", " + end.y + ")");
@@ -41,7 +42,7 @@ public class StraightTrackPiece extends TrackPiece {
         }
 
         Vector2 newpos =  begin.cpy().add(u.scl(v.len()));
-
+        // ensure that the drop position is within the begin/end boundaries w/i a radius of the mutex
         float minX = Math.min(begin.x, end.x)-radius;
         float maxX = Math.max(begin.x, end.x)+radius;
         float minY = Math.min(begin.y, end.y)-radius;
@@ -53,8 +54,11 @@ public class StraightTrackPiece extends TrackPiece {
             return false;
         }
 
+        // Split the original track piece (There are only straight right now)
         StraightTrackPiece newPiece = new StraightTrackPiece(next, newpos, end.cpy());
+        // Stick a mutex one in the middle
         MutexTrackPiece mutex = new MutexTrackPiece(Math.round(newpos.x), Math.round(newpos.y), m.isLocked(), m.getLock(), newPiece);
+        // Change the end point for this trackpiece
         this.end.set(newpos.cpy());
         next = mutex;
 
@@ -73,6 +77,7 @@ public class StraightTrackPiece extends TrackPiece {
 
     @Override
     public Vector2 getNextPosition(Vector2 currentPosition) {
+        // Move forward 100 units at a time or jump to the end it within 100 units thereof
         Vector2 forward = new Vector2(end);
         forward.sub(currentPosition);
         Gdx.app.log(this.getClass().getName(), "Forward: " + forward.toString());

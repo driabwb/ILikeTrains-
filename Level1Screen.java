@@ -5,7 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
+// Class for the level 1 screen
+//   Most methods are not truely implemented because they were unneccessary and I don't fully
+//   understand their use.
 public class Level1Screen implements Screen {
+    // The world for level 1 (handles most of the details
     private Level1World theWorld = null;
 
     Level1Screen(Game game){
@@ -18,10 +22,14 @@ public class Level1Screen implements Screen {
 
     }
 
+    // This is the update and draw method
     @Override
     public void render(float delta) {
+        // Clear the screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // Update eveything in the world
         theWorld.update(delta);
+        // Render the world
         theWorld.draw();
     }
 

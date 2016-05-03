@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+// A representation of a Train
 public class Train extends GameObject{
     private Rectangle rect = null;
     private static ShapeRenderer shapeRenderer = null;

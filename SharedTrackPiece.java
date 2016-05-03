@@ -3,6 +3,9 @@ package com.david.iter1iliketrains;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 
+
+// Unfinished class supposed to handle critical section violations
+//  (2 trains on the same track at the same time)
 public class SharedTrackPiece extends TrackPiece{
     private TrackPiece piece = null;
     private SharedTrackObject object = null;

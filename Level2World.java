@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.List;
 
+// The level 2 world.  See Level1World for more detailed descriptions
 public class Level2World extends InputAdapter {
     private static Level2World theWorld = null;
     private List<GameObject> gameObjects = null;
@@ -36,6 +37,7 @@ public class Level2World extends InputAdapter {
         camera = new OrthographicCamera(width, height);
         camera.setToOrtho(false, width, height);
 
+        // Generate the track for Train 1
         List<TrackPiece> trackList = new ArrayList<TrackPiece>();
         trackList.add(new StraightTrackPiece(null, new Vector2(width/2, height/4), new Vector2(5*width/8, height/4)));
         trackList.add(new StraightTrackPiece(null, new Vector2(5*width/8, height/4), new Vector2(5*width/8, 3*height/4)));
@@ -45,6 +47,7 @@ public class Level2World extends InputAdapter {
         trackList.get(1).setNext(trackList.get(2));
         trackList.get(2).setNext(trackList.get(3));
         trackList.get(3).setNext(trackList.get(0));
+        // Generate the track for Train 2
         List<TrackPiece> trackList2 = new ArrayList<TrackPiece>();
         trackList2.add(new StraightTrackPiece(null, new Vector2(3*width/4,3*height/4), new Vector2(5*width/8, 3*height/4)));
         trackList2.add(new StraightTrackPiece(null, new Vector2(5*width/8, 3*height/4), new Vector2(5*width/8, height/4)));

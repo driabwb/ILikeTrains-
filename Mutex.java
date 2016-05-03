@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
+// This is mostly a UI element
 public class Mutex extends GameObject {
     private ShapeRenderer renderer;
 
@@ -32,10 +33,11 @@ public class Mutex extends GameObject {
     @Override
     public GameObject touchDown(int x, int y, int button){
         Gdx.app.log(this.getClass().getName(), "Point: (" + this.x + ", " + this.y + ")");
+        // If not touching this do nothing
         if(distance2(x,y) > Math.pow(radius, 2)){
             return null;
         }
-
+        // Otherwise create a new Mutex object to be dragged
         return new Mutex(x, y, isLocked, theLock, renderer.getColor());
     }
 

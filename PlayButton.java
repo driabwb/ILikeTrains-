@@ -6,11 +6,15 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-
+// This represents the Play/Reset Button
 public class PlayButton extends GameObject{
+    // Is the simulation currently going
     private boolean play = false;
+    // Draws stuff
     private ShapeRenderer renderer = null;
+    // Radius for drawing
     private int radius = 0;
+    // An object for telling the world to reset on button click
     private WorldReset reset = null;
 
     public PlayButton(int x, int y) {
@@ -53,9 +57,13 @@ public class PlayButton extends GameObject{
     @Override
     public GameObject touchDown(int x, int y, int button){
         Gdx.app.log(this.getClass().getName(), "Point: (" + this.x + ", " + this.y + ")");
+        // If the button is clicked
         if(Math.pow(radius, 2) >= distance2(x,y)){
+            // Change the play status
             play = !play;
+            // set the Reset object Appropriately
             reset.setReset(!play);
+            // Give back the reset object
             return reset;
         }
         return null;

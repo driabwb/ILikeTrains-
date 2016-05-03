@@ -1,5 +1,7 @@
 package com.david.iter1iliketrains;
 
+// Simple Lock class with two states
+//   All methods are synchronized to reduce multiple thread collision
 public class Lock {
     private boolean isLocked = false;
 

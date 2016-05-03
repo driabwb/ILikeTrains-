@@ -5,6 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
+// Class for the level 1 screen
+//   Most methods are not truely implemented because they were unneccessary and I don't fully
+//   understand their use.
 public class Level2Screen implements Screen {
     private Level2World theWorld = null;
 

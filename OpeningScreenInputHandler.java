@@ -3,6 +3,8 @@ package com.david.iter1iliketrains;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.InputProcessor;
 
+// Handles the user input on the opening screen
+//   This just passes you through if you touch the screen
 public class OpeningScreenInputHandler implements InputProcessor {
     Game theGame = null;
 

@@ -10,14 +10,12 @@ import java.util.List;
 
 
 public class Track extends GameObject{
-    private List<TrackPiece> trackPieces = null;
     private TrackPiece startPiece = null;
     private TrackPiece currentPiece = null;
 
     public Track(int x, int y, List<TrackPiece> pieces){
         super(x,y);
-        trackPieces = pieces;
-        currentPiece = trackPieces.get(0);
+        currentPiece = pieces.get(0);
         startPiece = currentPiece;
     }
 

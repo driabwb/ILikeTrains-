@@ -31,6 +31,7 @@ public class OpeningScreenRenderer {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.begin();
+        // Draw the words on the screen
         AssetLoader.title.draw(sb, "I Like Trains!", theWorld.getWidth()/4, theWorld.getHeight()/2);
         sb.end();
     }

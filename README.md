@@ -74,13 +74,13 @@ Tracks are the most interesting game object in *I Like Trains*.  The tracks need
 These appear better in github where they appear as checkboxes.
 
 The following list of Future Work appears in no particular order.
-[ ] Decide on a consistent design
-[ ] More Track Types
-[ ] Improve the Design. Too much is rather ad hoc and needs more thought
-[ ] Be able to move and remove placed mutexes
-[ ] Collision detection for trains
-[ ] Deadlock detection
-[ ] starvation detection
-[ ] Algorithm for finding bad scenarios
-[ ] Investigate other frameworks
-[ ] Use as a simulation tool for debugging misbehaving programs
+- [ ] Decide on a consistent design
+- [ ] More Track Types
+- [ ] Improve the Design. Too much is rather ad hoc and needs more thought
+- [ ] Be able to move and remove placed mutexes
+- [ ] Collision detection for trains
+- [ ] Deadlock detection
+- [ ] starvation detection
+- [ ] Algorithm for finding bad scenarios
+- [ ] Investigate other frameworks
+- [ ] Use as a simulation tool for debugging misbehaving programs
